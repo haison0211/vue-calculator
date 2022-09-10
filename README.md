@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-# vue-calculator
-
 This template should help get you started developing with Vue 3 in Vite.
 
 ## Recommended IDE Setup
@@ -47,6 +44,3 @@ npm run test:e2e # or `npm run test:e2e:ci` for headless testing
 ```sh
 npm run lint
 ```
-=======
-# vue-calculator
->>>>>>> 57bcae60c81e1dd7d15f470eaa3347309011a41a
