@@ -1,12 +1,13 @@
 <script>
 export default {
-  props: ["id", "text", "title", "width"],
+  props: ["id", "text", "title", "type"],
+  emits: ["check-type"]
 };
 </script>
 
 <template>
   <div class="key-btn">
-    <button :title="title" :width="width" class="cal-key">
+    <button :title="title" class="cal-key" @click="$emit('check-type')">
       {{ text }}
     </button>
   </div>
