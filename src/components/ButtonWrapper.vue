@@ -22,7 +22,7 @@ export default {
         { id: id++, text: 5, title: "Number Five", type: "num" },
         { id: id++, text: 6, title: "Number Six", type: "num" },
         { id: id++, text: "/", title: "Divide", type: "ops" },
-        { id: id++, text: "x", title: "Multiply", type: "ops" },
+        { id: id++, text: "*", title: "Multiply", type: "ops" },
         { id: id++, text: 3, title: "Number Three", type: "num" },
         { id: id++, text: 2, title: "Number Two", type: "num" },
         { id: id++, text: 1, title: "Number One", type: "num" },

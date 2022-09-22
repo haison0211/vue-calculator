@@ -9,7 +9,8 @@ export default {
             entries: "",
             isPositive: true,
             ans: "ans",
-            mAns:""
+            mAns: "",
+            result: 0
         }
     },
 
@@ -20,13 +21,9 @@ export default {
 
         addOps(op) {
             let ops = ["+", "-", "/", "*", "%", "√", "^"]
-            // this.entries += op
             if (this.entries != "") {
-                if (ops.includes(this.entries.charAt(this.entries.length - 1)) ) {
-                    // this.entries.replace(this.entries.charAt(this.entries.length - 1), op)
-                    // this.entries[this.entries.lastIndexOf()] = op
-                    console.log(this.entries.charAt(this.entries.length - 1))
-                    // this.entries += "op"
+                if (ops.includes(this.entries.charAt(this.entries.length - 1))) {
+                    this.replaceChar(op, this.entries.length - 1)
                 } else {
                     this.entries += op
                 }
@@ -40,13 +37,14 @@ export default {
                 this.entries = ""
             }
             if (ops == "DEL") {
-                this.entries += "d"
+                this.replaceChar("", this.entries.length - 1)
+
             }
             if (ops == "ANS") {
                 this.entries = this.ans
             }
             if (ops == "=") {
-                this.entries = ops
+                this.calculate(this.entries)
             }
             if (ops == "M+") {
                 this.entriesm = this.ans * 2
@@ -58,7 +56,7 @@ export default {
         },
 
         addSign(sign) {
-            if(sign == ".") {
+            if (sign == ".") {
                 if (!this.entries.includes(sign)) {
                     this.entries += sign
                 } else {
@@ -67,21 +65,43 @@ export default {
             }
 
             if (sign == "+/-") {
-                if (this.isPositive) {    
-                    this.entries += "b"
+                if (this.isPositive) {
+                    this.entries = this.entries.slice(0, 0) + "-" + this.entries.slice(0);
                     this.isPositive = false
                 } else {
+                    this.entries.replace("", 0)
                     this.isPositive = true
-                    this.entries.replace("b", "")
                 }
-                
+
             }
+        },
+
+        replaceChar(newChar, index) {
+            this.entries = this.entries.split("");
+
+            this.entries[index] = newChar;
+
+            this.entries = this.entries.join("");
+
+            return this.entries;
+        },
+
+        calculate(s) {
+            this.result = 0,
+                s = s.match(/[+\-]*(\.\d+|\d+(\.\d+)?)/g) || [];
+
+            while (s.length) {
+                this.result += parseFloat(s.shift());
+            }
+
+            this.entries = this.result.toString()
+            return this.entries;
         }
     },
 
-    mounted() {
-        this.entries.toString()
-    }
+    // mounted() {
+    //     this.entries.toString()
+    // }
 }
 </script>
 
