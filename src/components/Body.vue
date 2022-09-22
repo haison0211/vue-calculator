@@ -96,11 +96,19 @@ export default {
 
             this.entries = this.result.toString()
             return this.entries;
-        }
+        },
+
+        // entriesLength(str) {
+        //     if (str.length > 10) {
+        //         str = str.substring(0, 10);
+        //     }
+        //     this.entries = str
+        //     return this.entries
+        // }
     },
 
     // mounted() {
-    //     this.entries.toString()
+    //     this.entriesLength(this.entries)
     // }
 }
 </script>
@@ -114,10 +122,14 @@ export default {
 
 <style scoped>
 .cal-body {
-    border: 2px solid black;
-    width: 400px;
+    width: 350px;
     height: 500px;
     margin-left: auto;
     margin-right: auto;
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
 }
 </style>

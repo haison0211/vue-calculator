@@ -69,9 +69,12 @@ export default {
 .btn-wrapper {
   width: 100%;
   height: 400px;
-  background-color: gray;
+  /*background-color: gray;*/
+  padding: 10px;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  align-content: space-between;
   flex-wrap: wrap;
+  border-top: 1px solid rgba(255,255,255,0.1);
 }
 </style>

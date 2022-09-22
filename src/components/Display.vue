@@ -12,11 +12,11 @@ export default {
 <style scoped>
 .display-part {
   width: 100%;
-  border: 1px solid red;
   height: 100px;
   text-align: right;
-  padding: 40px 15px 15px;
-  /*font-size: 1.5rem;
-  font-weight: 500;*/
+  padding: 30px 15px 15px;
+  font-size: 2rem;
+  font-weight: 500;
+  letter-spacing: 7px;
 }
 </style>

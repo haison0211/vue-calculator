@@ -20,12 +20,18 @@ export default {
 
 .cal-key {
   padding: 10px;
-  width: 70px;
-  height: 70px;
+  width: 55px;
+  height: 55px;
   cursor: pointer;
-  background-color: rgb(194, 192, 192);
-  border: none;
-  font-size: 1.5rem;
+  font-size: 1.1rem;
   border-radius: 5px;
+  position: relative;
+  display: inline-block;
+  background-color: green;
+  background-image: linear-gradient(green, lightgreen);
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(30px);
+
 }
 </style>

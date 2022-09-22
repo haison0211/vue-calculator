@@ -4,7 +4,7 @@ import { RouterLink, RouterView } from "vue-router";
 
 <template>
   <div class="wrapper">
-    <h1>Vue Calcultor</h1>
+    <h1 class="title">Vue Calcultor</h1>
     <RouterView />
   </div>
 </template>
@@ -13,5 +13,10 @@ import { RouterLink, RouterView } from "vue-router";
 .wrapper {
     width: 100%;
     text-align: center;
+    color: white;
+}
+
+.title {
+  margin-bottom: 20px;
 }
 </style>
