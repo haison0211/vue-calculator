@@ -8,7 +8,7 @@ export default {
         return {
             entries: "",
             isPositive: true,
-            ans: "ans",
+            ans: "0",
             mAns: "",
             result: 0
         }
@@ -47,11 +47,13 @@ export default {
                 this.calculate(this.entries)
             }
             if (ops == "M+") {
-                this.entriesm = this.ans * 2
+                this.ans++
+                this.entries = this.ans.toString()
 
             }
             if (ops == "M-") {
-                this.entries = ops
+                this.ans--
+                this.entries = this.ans.toString()
             }
         },
 
@@ -87,15 +89,31 @@ export default {
         },
 
         calculate(s) {
-            this.result = 0,
-                s = s.match(/[+\-]*(\.\d+|\d+(\.\d+)?)/g) || [];
+            for (let i = 0; i < s.length; i++) {
+                if (s[i] == "^") {
+                    s = s.split("");
 
-            while (s.length) {
-                this.result += parseFloat(s.shift());
+                    s[i] = "**";
+
+                    s = s.join("");
+                }
+
+                // if (s[i] == "√") {
+                //     s = s.split("");
+
+                //     let next = s[i + 1]
+                //    let newVal = Math.sqrt(parseFloat(next));
+                //     s.splice(s[i], 2, "*", newVal)
+
+                //     s = s.join("");
+                // }
             }
 
-            this.entries = this.result.toString()
-            return this.entries;
+            console.log(s)
+
+            s = eval(s)
+            this.ans = s.toString()
+            this.entries = s.toString()
         },
 
         // entriesLength(str) {
@@ -108,7 +126,7 @@ export default {
     },
 
     // mounted() {
-    //     this.entriesLength(this.entries)
+    //     this.entries.toString()
     // }
 }
 </script>

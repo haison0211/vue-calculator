@@ -1,4 +1,7 @@
 @import "./base.css";
+body {
+ background-color: #07274D;
+}
 
 #app {
   max-width: 1280px;
@@ -22,9 +25,6 @@ a,
 }
 
 @media (min-width: 1024px) {
-  body {
-   background-color: #07274D;
-  }
 
   /* #app {
     display: grid;
