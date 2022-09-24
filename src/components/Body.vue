@@ -23,11 +23,43 @@ export default {
             let ops = ["+", "-", "/", "*", "%", "√", "^"]
             if (this.entries != "") {
                 if (ops.includes(this.entries.charAt(this.entries.length - 1))) {
-                    this.replaceChar(op, this.entries.length - 1)
+                    if (op == "-") {
+                        if (this.entries.charAt(this.entries.length - 1) == "+" || this.entries.charAt(this.entries.length - 1) == "-") {
+                            this.replaceChar(op, this.entries.length - 1)
+                        } else if (this.entries.charAt(this.entries.length - 1) == "√") {
+                            this.entries = this.entries
+                        }
+                        else {
+                            this.entries += op
+                        }
+                    } if (ops.includes(this.entries.charAt(this.entries.length - 2))) {
+                        if (this.entries.charAt(this.entries.length - 1) == "√") {
+                            if (op == "√") {
+                                this.entries += op
+                            } else {
+                                this.entries = this.entries
+                            }
+                        } else if (this.entries.charAt(this.entries.length - 1) == "-") {
+                            if (op == "√") {
+                                this.replaceChar(op, this.entries.length - 1)
+                            } else {
+                                this.entries = this.entries
+                            }
+                        } else {
+                            this.entries = this.entries
+                        }
+                    } else if (op == "√") {
+                        this.entries += op
+                    } else {
+                        this.replaceChar(op, this.entries.length - 1)
+                    }
                 } else {
                     this.entries += op
                 }
+            } else if (op == "-" || op == "√") {
+                this.entries += op
             } else {
+
                 this.entries = ""
             }
         },
@@ -59,22 +91,16 @@ export default {
 
         addSign(sign) {
             if (sign == ".") {
+                
+                // let mySubString = this.entries.substring(
+                //     str.indexOf(".") + 1,
+                //     str.lastIndexOf("+")
+                // );
                 if (!this.entries.includes(sign)) {
                     this.entries += sign
                 } else {
                     this.entries
                 }
-            }
-
-            if (sign == "+/-") {
-                if (this.isPositive) {
-                    this.entries = this.entries.slice(0, 0) + "-" + this.entries.slice(0);
-                    this.isPositive = false
-                } else {
-                    this.entries.replace("", 0)
-                    this.isPositive = true
-                }
-
             }
         },
 
@@ -98,22 +124,30 @@ export default {
                     s = s.join("");
                 }
 
-                // if (s[i] == "√") {
-                //     s = s.split("");
+                if (s[i] == "√") {
+                    s = s.split("");
 
-                //     let next = s[i + 1]
-                //    let newVal = Math.sqrt(parseFloat(next));
-                //     s.splice(s[i], 2, "*", newVal)
+                    let next = s[i + 1]
+                    let newVal = next.toString() + "**0.5"
+                    if (isNaN(parseFloat(s[i - 1]))) {
+                        s.splice(i, 2, newVal)
+                    } else {
+                        s.splice(i, 2, "*", newVal)
+                    }
 
-                //     s = s.join("");
-                // }
+                    s = s.join("");
+                }
             }
 
             console.log(s)
-
-            s = eval(s)
-            this.ans = s.toString()
-            this.entries = s.toString()
+            try {
+                s = eval(s)
+                this.ans = s.toString()
+                this.entries = s.toString()
+            }
+            catch (err) {
+                this.entries = err.message;
+            }
         },
 
         // entriesLength(str) {

@@ -27,8 +27,6 @@ export default {
   border-radius: 5px;
   position: relative;
   display: inline-block;
-  background-color: green;
-  background-image: linear-gradient(green, lightgreen);
   background-color: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(30px);
