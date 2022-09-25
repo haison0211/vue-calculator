@@ -7,21 +7,26 @@ export default {
     data() {
         return {
             entries: "",
+            entriesLength: false,
             isPositive: true,
             ans: "0",
             mAns: "",
-            result: 0
+            result: 0,
+            hasDot: false,
+            isError: false
         }
     },
 
     methods: {
         addNum(inp) {
+            this.isError = false
             this.entries += inp
         },
 
         addOps(op) {
+            this.isError = false
             let ops = ["+", "-", "/", "*", "%", "√", "^"]
-            if (this.entries != "") {
+            if (this.entries != "" && this.entries != "√" && this.entries != "-" && this.entries != "Bad Expression") {
                 if (ops.includes(this.entries.charAt(this.entries.length - 1))) {
                     if (op == "-") {
                         if (this.entries.charAt(this.entries.length - 1) == "+" || this.entries.charAt(this.entries.length - 1) == "-") {
@@ -60,11 +65,13 @@ export default {
                 this.entries += op
             } else {
 
-                this.entries = ""
+                this.entries = this.entries
             }
+            this.hasDot = false
         },
 
         operations(ops) {
+            this.isError = false
             if (ops == "C") {
                 this.entries = ""
             }
@@ -90,16 +97,13 @@ export default {
         },
 
         addSign(sign) {
+            this.isError = false
             if (sign == ".") {
-                
-                // let mySubString = this.entries.substring(
-                //     str.indexOf(".") + 1,
-                //     str.lastIndexOf("+")
-                // );
-                if (!this.entries.includes(sign)) {
+                if (!this.hasDot) {
                     this.entries += sign
+                    this.hasDot = true
                 } else {
-                    this.entries
+                    this.entries = this.entries
                 }
             }
         },
@@ -115,59 +119,75 @@ export default {
         },
 
         calculate(s) {
-            for (let i = 0; i < s.length; i++) {
-                if (s[i] == "^") {
-                    s = s.split("");
+            if (!this.entries == "") {
 
-                    s[i] = "**";
 
-                    s = s.join("");
-                }
+                for (let i = 0; i < s.length; i++) {
+                    if (s[i] == "^") {
+                        s = s.split("");
 
-                if (s[i] == "√") {
-                    s = s.split("");
+                        s[i] = "**";
 
-                    let next = s[i + 1]
-                    let newVal = next.toString() + "**0.5"
-                    if (isNaN(parseFloat(s[i - 1]))) {
-                        s.splice(i, 2, newVal)
-                    } else {
-                        s.splice(i, 2, "*", newVal)
+                        s = s.join("");
                     }
 
-                    s = s.join("");
-                }
-            }
+                    if (s[i] == "√") {
+                        s = s.split("");
 
-            console.log(s)
-            try {
-                s = eval(s)
-                this.ans = s.toString()
-                this.entries = s.toString()
-            }
-            catch (err) {
-                this.entries = err.message;
+                        let next = s[i + 1]
+                        let newVal = "0.5**" + next.toString()
+                        if (isNaN(parseFloat(s[i - 1]))) {
+                            s.splice(i, 2, newVal)
+                        } else {
+                            s.splice(i, 2, "*", newVal)
+                        }
+
+                        s = s.join("");
+                    }
+                }
+
+                console.log(s)
+                try {
+                    s = eval(s)
+                    this.ans = s.toString()
+                    this.entries = s.toString()
+                    // this.isError = false
+                }
+                catch (err) {
+                    this.isError = true
+                    this.entries = "Bad Expression";
+                }
             }
         },
 
-        // entriesLength(str) {
-        //     if (str.length > 10) {
-        //         str = str.substring(0, 10);
+        // entriesLen(str) {
+        //     if (str.length > 12) {
+        //         str = Math.exp(eval(str))
+        //     console.log(str + "is greater than 10")
         //     }
-        //     this.entries = str
+        //     this.entries = str.toString()
+
+        //     // if (str.length > 13) {
+
+        //     //     str = str.split("");
+
+
+        //     //     s = s.join("");
+        //     // }
+        //     // this.entries = str
         //     return this.entries
         // }
     },
 
     // mounted() {
-    //     this.entries.toString()
+    //     this.entriesLen(this.entries)
     // }
 }
 </script>
 
 <template>
     <section class="cal-body">
-        <Display :entries="entries"></Display>
+        <Display :entries="entries" :isError="isError"></Display>
         <ButtonWrapper @add-num="addNum" @add-ops="addOps" @add-sign="addSign" @add-cal="operations"></ButtonWrapper>
     </section>
 </template>
