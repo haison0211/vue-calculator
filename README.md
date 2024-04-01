@@ -1,4 +1,4 @@
-This template should help get you started developing with Vue 3 in Vite.asd
+This template should help get you started developing with Vue 3 in Vite.asdasdas
 
 ## Recommended IDE Setup
 
