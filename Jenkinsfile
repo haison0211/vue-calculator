@@ -10,7 +10,7 @@ pipeline {
         stage('Hello') {
             steps {
                 echo 'Hello, world! develop'
-                npm install
+                sh npm install
             }
         }
     }
