@@ -7,11 +7,34 @@ pipeline {
     }
     
     stages {
+        stage('Linting') {
+            steps {
+                sh 'npm run lint'
+            }
+        }
         stage('Build') {
             steps {
-                echo 'Install dependencies!'
-                sh 'npm install'
+                echo 'Build!!!'
+                sh 'npm run build'
             }
+        }
+        stage('Unit Tests') {
+            steps {
+                echo 'Run Unit Tests!'
+                sh 'npm run test:unit'
+            }
+        }
+        stage('End-to-End Tests') {
+            steps {
+                echo 'Run End-to-End Tests!'
+                sh 'npm run test:e2e'
+            }
+        }
+    }
+    
+    post {
+        always {
+            archiveArtifacts 'dist/**' // Archive the 'dist' folder and all its contents
         }
     }
 }
