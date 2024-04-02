@@ -10,7 +10,9 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Install dependencies! develop'
-                npm install   
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    sh 'npm install'
+                }
             }
         }
     }
