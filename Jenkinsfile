@@ -2,17 +2,15 @@ pipeline {
     agent {
         docker {
             image 'node:latest'
-            // args '-u root'
+            args '-u root'
         }
     }
     
     stages {
         stage('Build') {
             steps {
-                script {
-                    echo 'Install dependencies! develop'
-                    sh npm install   
-                }
+                echo 'Install dependencies! develop'
+                npm install   
             }
         }
     }
