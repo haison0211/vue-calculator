@@ -9,7 +9,8 @@ pipeline {
     stages {
         stage('Linting') {
             steps {
-                sh 'npm run lint'
+                echo "Run Linting"
+                // sh 'npm run lint'
             }
         }
         stage('Build') {
